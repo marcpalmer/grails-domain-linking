@@ -78,6 +78,13 @@ Link any domain objects to one another to indicate user-supplied relationships e
          def booksLikedByMarc = Book.linked.in.likedBy(userMarc) // return book instances with "liked" where src is userMarc
          def booksWithAuthorPeter = Book.linked.out.authoredBy(userPeter) // return book instances with "authored" where dest is userPeter
 
+         We also need to support counting of these, and possibly counting the difference between those with a link and those without:
+         
+         def likingStats = Book.links.statisticsForLiked
+         assert likingStats.all = 5
+         assert likingStats.liked = 3
+
+
          class Book ... void liked() {
             this.linkTo(currentThreadUser, 'liked')
             this.activity('liked')
