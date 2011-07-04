@@ -75,8 +75,11 @@ Link any domain objects to one another to indicate user-supplied relationships e
          def likers = book.linked.in.liked // return linking src objects
          def likingUsers = book.linked.in.likedByType(User) // return linking src objects
 
-         def booksLikedByMarc = Book.linked.in.likedBy(userMarc) // return book instances with "liked" where src is userMarc
-         def booksWithAuthorPeter = Book.linked.out.authoredBy(userPeter) // return book instances with "authored" where dest is userPeter
+         def isBookLikedByAnyone = book in Book.links.liked
+         def isBookLikedByX = book in Book.links.likedBy(userMarc)
+         
+         def booksLikedByMarc = Book.linked.likedFrom(userMarc) // return book instances with "liked" where src is userMarc
+         def booksWithAuthorPeter = Book.linked.authoredTo(userPeter) // return book instances with "authored" where dest is userPeter
 
          We also need to support counting of these, and possibly counting the difference between those with a link and those without:
          
